@@ -2,6 +2,7 @@
   (:require [reagent.core :as reagent :refer [atom]]
             [secretary.core :as secretary :refer-macros [defroute]]
             [devcards.core :as dc]
+            [game.ui.widgets :as wid]
             [game.state :as state]
             [game.views.heroes :as heroes-view]
             [game.views.hunt :as hunt-view]
@@ -51,3 +52,16 @@
 (defcard hello-world
   (reagent/as-element [hello "World"]))
 
+(defcard item-slot 
+  (reagent/as-element 
+    (wid/item-slot 
+      {:src "/assets/item_slot.png" :name "placeholder" :width "50" :height "50"})))
+
+(defcard item-slot 
+  (reagent/as-element 
+    (wid/item-list 
+      (for [x (range 4)] {:name x :src "assets/item_slot.png"}))))
+
+(defcard hp-bar 
+  (reagent/as-element 
+    (wid/hp-bar 5 5)))
