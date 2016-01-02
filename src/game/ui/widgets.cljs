@@ -1,8 +1,10 @@
 (ns game.ui.widgets)
 
 (defn item-slot [item] (let [itemImg (item :src) itemName (item :name)] 
-  [:div [:img {:src itemImg}] [:p itemName]]))
+  [:div {:title itemName} [:img {:src itemImg}]]))
+
+(defn item-slot-element [item] [:li (item-slot item)])
 
 (defn item-list [items]
-  [:li (map (fn [item] [item]) items)])
+  [:ul (map item-slot-element items)])
 
