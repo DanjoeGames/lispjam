@@ -1,15 +1,15 @@
 (ns game.core
   (:require [reagent.core :as reagent :refer [atom]]
+            [secretary.core :as secretary :refer-macros [defroute]]
+            [devcards.core :as dc]
             [game.state :as state]
             [game.views.heroes :as heroes-view]
             [game.views.hunt :as hunt-view]
-            [game.views.league :as league-view]
-            [secretary.core :as secretary :refer-macros [defroute]]
-            [goog.events :as events]
-            [goog.history.EventType :as EventType])
-  (:import goog.History))
+            [game.views.league :as league-view])
+  (:require-macros [devcards.core :refer [defcard]]))
 
 (enable-console-print!)
+(devcards.core/start-devcard-ui!)
 
 (defroute "*" []
   (state/put! :view heroes-view/main))
@@ -32,10 +32,10 @@
 
 (defn init! []
   (secretary/set-config! :prefix \#)
-  (hook-browser-navigation!)
-  (reagent/render-component
-    [app]
-    (. js/document (getElementById "app"))))
+  (hook-browser-navigation!))
+;;  #_(reagent/render-component
+;;    [app]
+;;    (. js/document (getElementById "app"))))
 
 (init!)
 
@@ -44,4 +44,10 @@
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
 )
+
+(defn hello [name]
+  [:h1 name])
+
+(defcard hello-world
+  (reagent/as-element [hello "World"]))
 

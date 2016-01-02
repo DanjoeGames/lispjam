@@ -7,6 +7,7 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.170"]
                  [org.clojure/core.async "0.2.374"]
+                 [devcards "0.2.1"]
                  [reagent "0.5.0"]
                  [secretary "1.2.0"]]
 
@@ -21,7 +22,7 @@
               [{:id "dev"
                 :source-paths ["src"]
 
-                :figwheel {:on-jsload "game.core/on-js-reload"}
+                :figwheel {:on-jsload "game.core/on-js-reload" :devcards true }
 
                 :compiler {:main game.core
                            :asset-path "js/compiled/out"
