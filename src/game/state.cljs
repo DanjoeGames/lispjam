@@ -9,10 +9,10 @@
   (clojure.core/get @state k default))
 
 (defn put! [k v]
-  (clojure.core/swap! state assoc k v))
+  (swap! state assoc k v))
 
 (defn update-in! [ks f & args]
-  (clojure.core/swap!
+  (swap!
     state
     #(apply (partial update-in % ks f) args)))
 

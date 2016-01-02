@@ -11,7 +11,7 @@
 
 (enable-console-print!)
 
-(defroute "/" []
+(defroute "*" []
   (state/put! :view heroes-view/main))
 (defroute "/league" []
   (state/put! :view league-view/main))
@@ -19,7 +19,7 @@
   (state/put! :view hunt-view/main))
 
 (defn app []
-  (state/get :view))
+  [(state/get :view)])
 
 (defn hook-browser-navigation! []
   (.addEventListener
@@ -40,7 +40,6 @@
 (init!)
 
 (defn on-js-reload []
-  (state/put! :view league-view/main)
   ;; optionally touch your app-state to force rerendering depending on
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
