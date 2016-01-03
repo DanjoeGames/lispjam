@@ -3,7 +3,7 @@
   (:require [reagent.core :as reagent]
             [game.views.heroes :as default-view]))
 
-(def state (reagent/atom {:view default-view/main}))
+(defonce state (reagent/atom {:view default-view/main}))
 
 (defn get [k & [default]]
   (clojure.core/get @state k default))

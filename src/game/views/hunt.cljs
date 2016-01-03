@@ -1,9 +1,35 @@
 (ns game.views.hunt
   (:require [reagent.core :as reagent]
-            [secretary.core :refer [dispatch!]]))
+            [secretary.core :refer [dispatch!]]
+            [game.ui.widgets :as widgets :refer [button icon]]
+            [game.ui.item :as item]))
+
+(defn action-bar []
+  [:div {:class "ui action-bar"}
+   [button "Heroes" {:on-click #(dispatch! "/heroes")} "yellow"]
+   [button "League" {:on-click #(dispatch! "/league")} "blue"]
+   [button "Shop"   {:on-click #(dispatch! "/shop")} "green"]])
+
+(defn monster-preview [monster]
+  [widgets/horizontal-preview
+   [:div {:class "hz-preview__level"}
+    [widgets/level (:level monster)]]
+   [:div [:strong (:name monster)]]
+   [item/slots [] 3]
+   [button [:span [icon "attack"] "Hunt"]]])
+
+(defn monsters-list [monsters]
+  [:div {:class "monsters-list"}
+   (map monster-preview monsters)])
 
 (defn main []
-  [:h1 "Hunt"
-    [:nav
-      [:button {:on-click #(dispatch! "/heroes")} "Heroes"]
-      [:button {:on-click #(dispatch! "/league")} "League"]]])
+  [:main
+   [widgets/navbar "Hunt"]
+   [monsters-list
+     [{:name "Medusa" :level 65}
+      {:name "Orix" :level 43}
+      {:name "Orix" :level 43}
+      {:name "Orix" :level 43}
+      {:name "Centaur" :level 12}]]
+   [widgets/action-bar]])
+

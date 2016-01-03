@@ -1,5 +1,6 @@
 (ns game.ui.widgets
   (:require [reagent.core :as reagent]
+            [secretary.core :refer [dispatch!]]
             [game.util.core :as util]))
 
 (defn button
@@ -21,6 +22,13 @@
   [icon-name]
     [:div {:class (str "icon" " " icon-name)}])
 
+(defn pill [& children]
+  [:div {:class "pill"}
+   [:div {:class "ui pill__left"}]
+   [:div {:class "ui pill__middle"}
+    children]
+   [:div {:class "ui pill__right"}]])
+
 (defn overlay
   "Fullscreen translucent overlay, good for doing modals.
    Expects a showing prop in props map which determines
@@ -34,7 +42,6 @@
 (defn level
   "Display a numeric level with the appropriate colouring"
   [x]
-    (println x (> x 100) (> x 50) (> x 20))
     [:span {:class (condp < x
                      100 "level--high"
                      50 "level--med"
@@ -92,9 +99,44 @@
 (defn navbar
   "Renders a navbar and accepts children to be rendered
    inside it"
-  [& children]
+  [title]
     [:nav {:class "ui navbar"}
-     children])
+     [pill [money 110044]]
+     [pill [:h2 title]]
+     [pill [level 300]]])
+
+(defn help-button []
+  (let [showing? (reagent/atom false)
+        show! #(reset! showing? true)
+        hide! #(reset! showing? false)]
+    (fn []
+      [:span
+       [button [icon "help"] {:on-click show!}]
+       [overlay {:showing? @showing?}
+        [scroll
+         [:h2 "Help"]
+         [:hr]
+         [:p "If you're reading this then we haven't
+              got round to implementing help yet."]
+         [:p "Sorry! Maybe you'll be able to figure
+              it out on your own."]
+         [:hr]
+         [button "Ok!" {:on-click hide!} "yellow"]]]])))
+
+(defn action-button [{text :text url :url color :color}]
+  [button
+   text
+   {:on-click #(dispatch! url)}
+   color])
+
+(defn action-bar []
+  (let [actions [{:text "Heroes" :url "/"       :color "yellow"}
+                 {:text "Hunt"   :url "/hunt"   :color "red"}
+                 {:text "League" :url "/league" :color "blue"}
+                 {:text "Shop"   :url "/shop"   :color "green"}]]
+    [:div {:class "ui action-bar"}
+     (map action-button actions)
+     [help-button]]))
 
 (defn cycler [& children]
   (let [index (reagent/atom 0)
@@ -103,4 +145,16 @@
       [:span {:on-click #(swap! index inc)}
         (get (vec children) (mod @index limit))])))
 
+(defn horizontal-preview [& children]
+  [:div {:class "hz-preview"}
+   [:div {:class "hz-preview__left"}
+    [:div {:class "ui hz-preview__left__top"}]
+    [:div {:class "ui hz-preview__left__middle"}
+     [:img {:src ""}]]
+    [:div {:class "ui hz-preview__left__bottom"}]]
+   [:div {:class "hz-preview__right"}
+    [:div {:class "ui hz-preview__right__top"}]
+    [:div {:class "ui hz-preview__right__middle"}
+     children]
+    [:div {:class "ui hz-preview__right__bottom"}]]])
 

@@ -30,12 +30,14 @@
       [:div {:class "ui hero-panel"}
         [widgets/hp-bar (:hp hero) 5]
         [widgets/xp-bar (:xp hero) 5]
+        [:br]
         [item/slots (:items hero) 3]]
       [:div {:class "ui hero-footer"}]
       [:div
        [widgets/cycler
         [button [icon "attack"] nil "red"]
-        [button [icon "defend"] nil "blue"]]
+        [button [icon "defend"] nil "blue"]
+        [button [icon "sleep"]]]
        [button [icon "potion"] nil]]])
 
 (defn list
@@ -43,6 +45,5 @@
    hero maps"
   [heroes]
     [:div {:class "hero-list"}
-     [:h3 "Your Heroes"]
      (map preview heroes)])
 

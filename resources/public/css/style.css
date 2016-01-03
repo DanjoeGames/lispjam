@@ -7,18 +7,173 @@
 }
 
 html, body {
-  font-family: 'CourneufRegular', monospace;
   margin: 0;
+}
+
+body {
+  font-family: 'CourneufRegular', monospace;
   background: #3b3e3f;
   color: #ddd;
+  padding-top: 60px;
+  padding-bottom: 80px;
 }
 
 h1, h2, h3, h4, h5, h6, p {
-  margin-top: 0;
+  margin: 0;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+hr {
+  height: 0;
+  border: 0;
+  border-bottom: solid 5px #404748;
 }
 
 .ui {
   background-image: url('/img/interface.png');
+}
+
+/*
+ * ------
+ * Navbar
+ * ------
+ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  line-height: 35px;
+  z-index: 5;
+  text-align: center;
+}
+
+/*
+ * -------
+ * Buttons
+ * -------
+ */
+.btn {
+  overflow: hidden;
+  display: inline-block;
+  height: 55px;
+  line-height: 55px;
+  color: #ddd;
+  font-weight: bold;
+}
+
+.btn:hover {
+  box-shadow: inset 0 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.btn:active {
+  box-shadow: inset 0 0 0 10px rgba(255, 255, 255, 0.9);
+}
+
+.btn + .btn {
+  margin-left: 5px;
+}
+
+.btn .icon {
+  position: relative;
+  top: 8px;
+}
+.btn .icon {
+  position: relative;
+  top: 8px;
+}
+
+.btn .icon + * {
+  margin-left: 10px;
+}
+
+.btn__left, .btn__middle, .btn__right {
+  height: 100%;
+  float: left;
+}
+
+.btn__middle {
+  background-image: url('/img/repeating-horizontal.png');
+}
+
+.btn__left, .btn__right {
+  width: 20px;
+}
+
+.btn--yellow {
+  color: #333;
+}
+
+.btn__left   { background-position: 0px 330px; }
+.btn__middle { background-position: 0px 0; }
+.btn__right  { background-position: -25px 330px; }
+
+.btn--red .btn__left   { background-position: -45px 330px; }
+.btn--red .btn__middle { background-position: 0px -55px; }
+.btn--red .btn__right  { background-position: -70px 330px; }
+
+.btn--yellow .btn__left   { background-position: -90px 330px; }
+.btn--yellow .btn__middle { background-position: 0px -110px; }
+.btn--yellow .btn__right  { background-position: -115px 330px; }
+
+.btn--green .btn__left   { background-position: -135px 330px; }
+.btn--green .btn__middle { background-position: 0px -165px; }
+.btn--green .btn__right  { background-position: -160px 330px; }
+
+.btn--blue .btn__left   { background-position: -180px 330px; }
+.btn--blue .btn__middle { background-position: 0px -220px; }
+.btn--blue .btn__right  { background-position: -205px 330px; }
+
+
+/*
+ * ----
+ * Pill
+ * ----
+ */
+.pill {
+  height: 55px;
+  line-height: 55px;
+  text-align: center;
+  display: inline-block;
+}
+
+.pill + .pill {
+  margin-left: -5px;
+}
+
+.pill .icon {
+  position: relative;
+  top: 6px;
+}
+
+.pill .icon + * {
+  margin-left: 10px;
+}
+
+.pill__left, .pill__middle, .pill__right {
+  float: left;
+}
+
+.pill__left, .pill__right {
+  height: 100%;
+  width: 25px;
+}
+
+.pill__left {
+  background-position: -225px 330px;
+}
+
+.pill__right {
+  background-position: -250px 330px;
+}
+
+.pill__middle {
+  background-image: url('/img/repeating-horizontal.png');
+  background-position: 0 -275px;
 }
 
 /*
@@ -87,6 +242,10 @@ h1, h2, h3, h4, h5, h6, p {
   background-position: -350px 0;
 }
 
+.sleep {
+  background-position: -375px 0;
+}
+
 .defend {
   background-position: -400px 0;
 }
@@ -96,7 +255,15 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .gold {
-  background-position: -375px 0;
+  background-position: -450px 0;
+}
+
+.quit {
+  background-position: -475px 0;
+}
+
+.help {
+  background-position: -474px -25px;
 }
 
 .amount--small {
@@ -168,6 +335,11 @@ h1, h2, h3, h4, h5, h6, p {
   line-height: 25px;
 }
 
+.icon-bar > :not(.icon) {
+  position: relative;
+  top: -7px;
+}
+
 
 .scroll {
   width: 300px;
@@ -193,6 +365,16 @@ h1, h2, h3, h4, h5, h6, p {
   padding: 0 20px;
 }
 
+.scroll hr {
+  height: 0;
+  border-bottom: solid 5px #B5B271;
+}
+
+.scroll p {
+  text-align: left;
+  font-size: 18px;
+}
+
 .overlay {
   position: fixed;
   top: 0;
@@ -208,10 +390,20 @@ h1, h2, h3, h4, h5, h6, p {
   margin-top: 100px;
 }
 
+.level--high { color: #3a89b1; }
+.level--med  { color: #2eba66; }
+.level--low  { color: orange; }
+.level--noob { color: white; }
+
+.monsters-list {
+  text-align: center;
+}
+
 .hz-preview {
   overflow: hidden;
   position: relative;
   display: inline-block;
+  text-align: left;
 }
 
 .hz-preview__left {
@@ -266,72 +458,4 @@ h1, h2, h3, h4, h5, h6, p {
   display: block;
   font-weight: bold;
 }
-
-.level--high { color: #3a89b1 };
-.level--med  { color: #2eba66 };
-.level--low  { color: orange };
-.level--noob { color: white };
-
-/*
- * ------
- * Navbar
- * ------
- */
-.navbar {
-  height: 45px;
-  line-height: 35px;
-}
-
-
-/*
- * -------
- * Buttons
- * -------
- */
-.btn {
-  overflow: hidden;
-  display: inline-block;
-  height: 55px;
-  line-height: 55px;
-  cursor: pointer;
-  color: #ddd;
-  font-weight: bold;
-}
-
-.btn__left, .btn__middle, .btn__right {
-  height: 100%;
-  float: left;
-}
-
-.btn__middle {
-  background-image: url('/img/repeating-horizontal.png');
-}
-
-.btn__left, .btn__right {
-  width: 20px;
-}
-
-.btn--yellow {
-  color: #333;
-}
-
-.btn__left   { background-position: 0px 330px; }
-.btn__middle { background-position: 0px 0; }
-.btn__right  { background-position: -25px 330px; }
-
-.btn--red .btn__left   { background-position: -45px 330px; }
-.btn--red .btn__middle { background-position: 0px -55px; }
-.btn--red .btn__right  { background-position: -70px 330px; }
-
-.btn--yellow .btn__left   { background-position: -90px 330px; }
-.btn--yellow .btn__middle { background-position: 0px -110px; }
-.btn--yellow .btn__right  { background-position: -115px 330px; }
-
-.btn--green .btn__left   { background-position: -135px 330px; }
-.btn--green .btn__middle { background-position: 0px -165px; }
-.btn--green .btn__right  { background-position: -160px 330px; }
-
-.btn--blue .btn__left   { background-position: -180px 330px; }
-.btn--blue .btn__middle { background-position: 0px -220px; }
-.btn--blue .btn__right  { background-position: -205px 330px; }
 
