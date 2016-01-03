@@ -20,6 +20,17 @@
   [icon-name]
     [:div {:class (str "icon" " " icon-name)}])
 
+(defn overlay
+  "Fullscreen translucent overlay, good for doing modals.
+   Expects a showing prop in props map which determines
+   whether to render it or not."
+  [props & children]
+    (if (:showing? props)
+      [:div {:class "overlay"}
+       [:div {:class "overlay__children"} children]]
+      nil))
+
+
 (defn scroll
   "A scroll interface for showing text or controls onscreen"
   [& children]

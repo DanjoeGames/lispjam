@@ -181,6 +181,21 @@ h1, h2, h3, h4, h5, h6, p {
   padding: 0 20px;
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  text-align: center;
+}
+
+.overlay__children {
+  display: inline-block;
+  margin-top: 100px;
+}
+
 /*
  * ------
  * Navbar
