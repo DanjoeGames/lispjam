@@ -12,12 +12,26 @@
       [widgets/level (:level hero)]]
      [:span {:class "hero-preview__nametag__name"} (:name hero)]])
 
+(defn sprite [url x y]
+  (let [s 100
+        rx (- (.round js/Math (* x s)))
+        ry (- (.round js/Math (* y s)))]
+    [:div {:class "sprite"
+           :style {:background-image (str "url(" url ")")
+                   :background-position (str rx "px " ry "px")
+                   :display "inline-block"
+                   :width s
+                   :height s}}]))
+
 (defn image
   "Renders an image representation of a hero. Expects
    a hero map as an argument."
-  [hero]
+  [{skin :skin hair :hair clothes :clothes}]
     [:div {:class "ui hero-image"}
-      [:img {:src "/img/man.png"}]])
+     [sprite "/img/heroes.png" (:x skin) (:y skin)]
+     [sprite "/img/heroes.png" (:x clothes) (:y clothes)]
+     [sprite "/img/heroes.png" (:x hair) (:y hair)]
+     ])
 
 (defn preview
   "Renders a complete preview of a hero, expects a

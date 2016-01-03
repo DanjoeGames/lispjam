@@ -5,11 +5,15 @@
             [game.state :as state]
             [game.views.heroes :as heroes-view]
             [game.views.hunt :as hunt-view]
-            [game.views.league :as league-view])
-  (:require-macros [devcards.core :refer [defcard]]))
+            [game.views.league :as league-view]
+            [game.models.hero :refer [skins hair clothes]]
+            [game.procedural.hero :as hero]))
 
 (enable-console-print!)
-;;(devcards.core/start-devcard-ui!)
+
+(println skins)
+(println hair)
+(println clothes)
 
 (defroute "/league" []
   (state/put! :view league-view/main))
@@ -41,7 +45,6 @@
 (init!)
 
 (defn on-js-reload []
-  (.clear js/console)
   ;; optionally touch your app-state to force rerendering depending on
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)

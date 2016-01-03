@@ -145,16 +145,16 @@
       [:span {:on-click #(swap! index inc)}
         (get (vec children) (mod @index limit))])))
 
-(defn horizontal-preview [& children]
+(defn horizontal-preview [left right]
   [:div {:class "hz-preview"}
    [:div {:class "hz-preview__left"}
     [:div {:class "ui hz-preview__left__top"}]
     [:div {:class "ui hz-preview__left__middle"}
-     [:img {:src ""}]]
+     [left]]
     [:div {:class "ui hz-preview__left__bottom"}]]
    [:div {:class "hz-preview__right"}
     [:div {:class "ui hz-preview__right__top"}]
     [:div {:class "ui hz-preview__right__middle"}
-     children]
+     [right]]
     [:div {:class "ui hz-preview__right__bottom"}]]])
 

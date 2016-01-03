@@ -4,7 +4,8 @@
             [game.ui.widgets :as widgets :refer [button icon]]
             [game.ui.hero :as hero]
             [game.ui.item :as item]
-            [game.util.core :as util]))
+            [game.util.core :as util]
+            [game.procedural.hero :refer [generate]]))
 
 (defn action-bar []
   [:div {:class "ui action-bar"}
@@ -15,10 +16,9 @@
 (defn main []
   [:main
    [widgets/navbar "Heroes"]
-   [hero/list
-    [{:name "Dan" :level 9 :xp 3 :hp 4 :items []}
-     {:name "Ed" :level 2 :xp 2 :hp 5 :items []}
-     {:name "Joe" :level 19 :xp 5 :hp 3 :items []}]]
+   [hero/list [(generate)
+               (generate)
+               (generate)]]
    [widgets/overlay {:showing? false}
      [widgets/scroll
       [:h2 "Victory!"]

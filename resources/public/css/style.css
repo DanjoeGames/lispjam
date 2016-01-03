@@ -210,6 +210,13 @@ hr {
   width: 100%;
   background-position: -830px 0px;
   height: 100px;
+  position: relative;
+}
+
+.hero-image .sprite {
+  position: absolute;
+  top: 0;
+  left: 40px;
 }
 
 .hero-image__footer {

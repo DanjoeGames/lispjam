@@ -4,21 +4,31 @@
             [game.state :as state]
             [game.ui.hero :as hero]
             [game.ui.widgets :as widgets :refer [button icon pill]]
-            [game.ui.item :as item]))
+            [game.ui.item :as item]
+            [game.procedural.hero :refer [generate]]))
 
 (defn table-entry [hero]
-  [widgets/horizontal-preview
-   [:div {:class "hz-preview__level"}
-    [widgets/level (:level hero)]]
-   [:strong (:name hero)]
-   [button
-    [:div "Hire for " [widgets/money 3000001]]]
-   [widgets/overlay {:showing? false}
-    [widgets/scroll
-     [:h2 "Do you want to purchase this hero?"]
-     [:hr]
-     [button "Cancel" nil "red"]
-     [button [widgets/money 300]]]]])
+  [:div {:class "hz-preview"}
+   [:div {:class "hz-preview__left"}
+    [:div {:class "ui hz-preview__left__top"}]
+    [:div {:class "ui hz-preview__left__middle"}
+     [hero/image hero]]
+    [:div {:class "ui hz-preview__left__bottom"}]]
+   [:div {:class "hz-preview__right"}
+    [:div {:class "ui hz-preview__right__top"}]
+    [:div {:class "ui hz-preview__right__middle"}
+     [:div {:class "hz-preview__level"}
+      [widgets/level (:level hero)]]
+     [:strong (:name hero)]
+     [button
+      [:div "Hire for " [widgets/money 3000001]]]
+     [widgets/overlay {:showing? false}
+      [widgets/scroll
+       [:h2 "Do you want to purchase this hero?"]
+       [:hr]
+       [button "Cancel" nil "red"]
+       [button [widgets/money 300]]]]]
+    [:div {:class "ui hz-preview__right__bottom"}]]])
 
 (defn league-table [heroes]
   [:div {:class "league-table"}
@@ -31,10 +41,6 @@
   [:main
    [widgets/navbar "League"]
    [league-table
-     [{:name "Medusa"  :level 65 :xp 3 :hp 1}
-      {:name "Orix"    :level 39 :xp 5 :hp 2}
-      {:name "Orix"    :level 4 :xp 2 :hp 3}
-      {:name "Orix"    :level -1 :xp 2 :hp 4}
-      {:name "Centaur" :level 12 :xp 5 :hp 5}]]
+    (map generate (range 10))]
    [widgets/action-bar]])
 
