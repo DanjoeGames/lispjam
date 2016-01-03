@@ -11,6 +11,10 @@ html, body {
   color: #ddd;
 }
 
+h1, h2, h3, h4, h5, h6, p {
+  margin-top: 0;
+}
+
 .ui {
   background-image: url('/img/interface.png');
 }
@@ -150,6 +154,31 @@ html, body {
 .icon-bar {
   height: 25px;
   line-height: 25px;
+}
+
+
+.scroll {
+  width: 300px;
+  color: #333;
+  text-align: center;
+}
+
+.scroll__top, .scroll__bottom {
+  height: 15px;
+}
+
+.scroll__top {
+  background-position: 0 380px;
+}
+
+.scroll__bottom {
+  background-position: 0 345px;
+}
+
+.scroll__middle {
+  background-image: url('/img/repeating-vertical.png');
+  background-position: -525px 0;
+  padding: 0 20px;
 }
 
 /*

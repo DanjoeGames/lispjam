@@ -20,6 +20,14 @@
   [icon-name]
     [:div {:class (str "icon" " " icon-name)}])
 
+(defn scroll
+  "A scroll interface for showing text or controls onscreen"
+  [& children]
+    [:div {:class "scroll"}
+     [:div {:class "ui scroll__top"}]
+     [:div {:class "ui scroll__middle"} children]
+     [:div {:class "ui scroll__bottom"}]])
+
 (defn xp-orb
   "Renders a full/empty xp orb icon depending on full?"
   [full?]
