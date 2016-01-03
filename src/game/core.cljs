@@ -11,12 +11,12 @@
 (enable-console-print!)
 ;;(devcards.core/start-devcard-ui!)
 
-(defroute "*" []
-  (state/put! :view heroes-view/main))
 (defroute "/league" []
   (state/put! :view league-view/main))
 (defroute "/hunt" []
   (state/put! :view hunt-view/main))
+(defroute "/*" []
+  (state/put! :view heroes-view/main))
 
 (defn app []
   [:div

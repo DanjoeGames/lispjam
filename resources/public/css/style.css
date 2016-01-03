@@ -2,6 +2,8 @@
 
 * {
   box-sizing: border-box;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 html, body {
@@ -45,7 +47,6 @@ h1, h2, h3, h4, h5, h6, p {
   width: 20px;
   font-weight: bold;
   top: 2px;
-  color: #2eba66;
   text-align: center;
 }
 
@@ -80,6 +81,18 @@ h1, h2, h3, h4, h5, h6, p {
   width: 25px;
   height: 25px;
   display: inline-block;
+}
+
+.attack {
+  background-position: -350px 0;
+}
+
+.defend {
+  background-position: -400px 0;
+}
+
+.potion {
+  background-position: -425px 0;
 }
 
 .gold {
@@ -119,7 +132,6 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .item-slots {
-  text-align: center;
 }
 
 .item-slot {
@@ -196,13 +208,77 @@ h1, h2, h3, h4, h5, h6, p {
   margin-top: 100px;
 }
 
+.hz-preview {
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+}
+
+.hz-preview__left {
+  float: left;
+  width: 180px;
+}
+
+.hz-preview__left__top {
+  height: 45px;
+  background-position: 0 275px;
+}
+
+.hz-preview__left__middle {
+  height: 100px;
+  background-position: 485px 0;
+  background-image: url('/img/repeating-vertical.png');
+}
+
+.hz-preview__left__bottom {
+  height: 20px;
+  background-position: 0 215px;
+}
+
+.hz-preview__right {
+  float: left;
+  width: 235px;
+}
+
+.hz-preview__right__top {
+  height: 15px;
+  background-position: 0 -170px;
+}
+
+.hz-preview__right__middle {
+  height: 135px;
+  background-position: -290px 0;
+  background-image: url('/img/repeating-vertical.png');
+  padding: 10px;
+}
+
+.hz-preview__right__bottom {
+  height: 15px;
+  background-position: 0 -200px;
+}
+
+.hz-preview__level {
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  text-align: center;
+  width: 30px;
+  display: block;
+  font-weight: bold;
+}
+
+.level--high { color: #3a89b1 };
+.level--med  { color: #2eba66 };
+.level--low  { color: orange };
+.level--noob { color: white };
+
 /*
  * ------
  * Navbar
  * ------
  */
 .navbar {
-  height: 40px;
+  height: 45px;
   line-height: 35px;
 }
 
@@ -219,6 +295,7 @@ h1, h2, h3, h4, h5, h6, p {
   line-height: 55px;
   cursor: pointer;
   color: #ddd;
+  font-weight: bold;
 }
 
 .btn__left, .btn__middle, .btn__right {
@@ -232,6 +309,10 @@ h1, h2, h3, h4, h5, h6, p {
 
 .btn__left, .btn__right {
   width: 20px;
+}
+
+.btn--yellow {
+  color: #333;
 }
 
 .btn__left   { background-position: 0px 330px; }

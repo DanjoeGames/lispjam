@@ -1,6 +1,6 @@
 (ns game.ui.hero
   (:refer-clojure :exclude [list])
-  (:require [game.ui.widgets :as widgets]
+  (:require [game.ui.widgets :as widgets :refer [button icon]]
             [game.ui.item :as item]))
 
 (defn nametag
@@ -8,7 +8,8 @@
    map as an argument."
   [hero]
     [:div {:class "ui hero-preview__nametag"}
-     [:span {:class "hero-preview__nametag__level"} (:level hero)]
+     [:span {:class "hero-preview__nametag__level"}
+      [widgets/level (:level hero)]]
      [:span {:class "hero-preview__nametag__name"} (:name hero)]])
 
 (defn image
@@ -29,8 +30,13 @@
       [:div {:class "ui hero-panel"}
         [widgets/hp-bar (:hp hero) 5]
         [widgets/xp-bar (:xp hero) 5]
-        [item/slots (:items hero) 6]]
-      [:div {:class "ui hero-footer"}]])
+        [item/slots (:items hero) 3]]
+      [:div {:class "ui hero-footer"}]
+      [:div
+       [widgets/cycler
+        [button [icon "attack"] nil "red"]
+        [button [icon "defend"] nil "blue"]]
+       [button [icon "potion"] nil]]])
 
 (defn list
   "Renders a list of heroes from a seq/vector of

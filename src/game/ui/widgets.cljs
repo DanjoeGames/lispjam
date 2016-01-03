@@ -1,5 +1,6 @@
 (ns game.ui.widgets
-  (:require [game.util.core :as util]))
+  (:require [reagent.core :as reagent]
+            [game.util.core :as util]))
 
 (defn button
   "Creates a button and passes props down to child
@@ -30,6 +31,15 @@
        [:div {:class "overlay__children"} children]]
       nil))
 
+(defn level
+  "Display a numeric level with the appropriate colouring"
+  [x]
+    (println x (> x 100) (> x 50) (> x 20))
+    [:span {:class (condp < x
+                     100 "level--high"
+                     50 "level--med"
+                     20 "level--low"
+                     "level--noob")} x])
 
 (defn scroll
   "A scroll interface for showing text or controls onscreen"
@@ -85,4 +95,12 @@
   [& children]
     [:nav {:class "ui navbar"}
      children])
+
+(defn cycler [& children]
+  (let [index (reagent/atom 0)
+        limit (count children)]
+    (fn []
+      [:span {:on-click #(swap! index inc)}
+        (get (vec children) (mod @index limit))])))
+
 
