@@ -3,12 +3,29 @@
 html, body {
   font-family: 'CourneufRegular', monospace;
   margin: 0;
+  background: #3b3e3f;
+  color: #ddd;
 }
 
 .ui {
   background-image: url('/img/interface.png');
 }
+/*
+ * ------
+ * Navbar
+ * ------
+ */
+.navbar {
+  height: 40px;
+  line-height: 35px;
+}
 
+
+/*
+ * -------
+ * Buttons
+ * -------
+ */
 .btn {
   overflow: hidden;
   display: inline-block;

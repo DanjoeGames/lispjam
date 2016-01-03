@@ -10,8 +10,13 @@
       [:div {:class "ui btn__middle"} text]
       [:div {:class "ui btn__right"}]]))
 
+(defn navbar [& children]
+  [:nav {:class "ui navbar"}
+   children])
+
 (defn main []
   [:main
+   [navbar [:strong "Heroes For Hire"]]
    [button "Hunt" {:on-click #(dispatch! "/hunt")} "red"]
    [button "League" {:on-click #(dispatch! "/league")} "blue"]])
 
