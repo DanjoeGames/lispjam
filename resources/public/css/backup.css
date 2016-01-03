@@ -1,10 +1,5 @@
 /* some style */
 
-html, body {
-  font-family: 'CourneufRegular', monospace;
-  margin: 0;
-}
-
 .ui {
   background-image: url('/img/interface.png');
 }

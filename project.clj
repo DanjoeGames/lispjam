@@ -4,15 +4,20 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
+  :mirrors {#"clojars" {:name "clojars mirror"
+                      :url "https://clojars-mirror.tcrawley.org/repo/"}}
+
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.170"]
                  [org.clojure/core.async "0.2.374"]
                  [devcards "0.2.1"]
                  [reagent "0.5.0"]
-                 [secretary "1.2.0"]]
+                 [secretary "1.2.0"]
+                 [garden "1.3.0"]]
 
   :plugins [[lein-cljsbuild "1.1.1"]
-            [lein-figwheel "0.5.0-1"]]
+            [lein-figwheel "0.5.0-1"]
+            [lein-garden "0.2.6"]]
 
   :source-paths ["src"]
 
@@ -22,7 +27,7 @@
               [{:id "dev"
                 :source-paths ["src"]
 
-                :figwheel {:on-jsload "game.core/on-js-reload" :devcards true }
+                :figwheel {:on-jsload "game.core/on-js-reload"}
 
                 :compiler {:main game.core
                            :asset-path "js/compiled/out"
@@ -68,4 +73,10 @@
 
              ;; to configure a different figwheel logfile path
              ;; :server-logfile "tmp/logs/figwheel-logfile.log"
-             })
+             }
+  :garden {:id "screen"
+           :source-paths ["src/styles"]
+           :stylesheet styles.core/screen
+           :compiler {:output-to "resources/public/css/style.css"
+                      :pretty-print? false}})
+

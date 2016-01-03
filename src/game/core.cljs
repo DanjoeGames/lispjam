@@ -9,7 +9,7 @@
   (:require-macros [devcards.core :refer [defcard]]))
 
 (enable-console-print!)
-(devcards.core/start-devcard-ui!)
+;;(devcards.core/start-devcard-ui!)
 
 (defroute "*" []
   (state/put! :view heroes-view/main))
@@ -19,7 +19,8 @@
   (state/put! :view hunt-view/main))
 
 (defn app []
-  [(state/get :view)])
+  [:div
+    [(state/get :view)]])
 
 (defn hook-browser-navigation! []
   (.addEventListener
@@ -32,10 +33,10 @@
 
 (defn init! []
   (secretary/set-config! :prefix \#)
-  (hook-browser-navigation!))
-;;  #_(reagent/render-component
-;;    [app]
-;;    (. js/document (getElementById "app"))))
+  (hook-browser-navigation!)
+  (reagent/render-component
+    [app]
+    (. js/document (getElementById "app"))))
 
 (init!)
 
@@ -44,10 +45,3 @@
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
 )
-
-(defn hello [name]
-  [:h1 name])
-
-(defcard hello-world
-  (reagent/as-element [hello "World"]))
-

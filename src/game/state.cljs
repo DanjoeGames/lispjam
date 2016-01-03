@@ -16,3 +16,5 @@
     state
     #(apply (partial update-in % ks f) args)))
 
+(add-watch state :watcher (fn [_ _ oldv newv]
+                            (println "State changed")))
