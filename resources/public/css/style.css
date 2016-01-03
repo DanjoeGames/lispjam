@@ -228,7 +228,7 @@ hr {
   background-image: url('/img/repeating-vertical.png');
   width: 100%;
   background-position: 0px -120px;
-  padding: 0 15px;
+  padding: 10px 15px;
 }
 
 .icon {
