@@ -2,6 +2,7 @@
   (:require [reagent.core :as reagent :refer [atom]]
             [secretary.core :as secretary :refer-macros [defroute]]
             [devcards.core :as dc]
+            [game.ui.widgets :as wid]
             [game.state :as state]
             [game.views.heroes :as heroes-view]
             [game.views.hunt :as hunt-view]
@@ -49,3 +50,4 @@
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
 )
+
