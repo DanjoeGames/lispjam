@@ -7,6 +7,7 @@
             [game.ui.item :as item]
             [game.procedural.hero :refer [generate]]))
 
+;; TODO refactor
 (defn table-entry [hero]
   [:div {:class "hz-preview"}
    [:div {:class "hz-preview__left"}
@@ -40,7 +41,6 @@
 (defn main []
   [:main
    [widgets/navbar "League"]
-   [league-table
-    (map generate (range 10))]
+   [league-table (state/get :heroes)]
    [widgets/action-bar]])
 

@@ -1,9 +1,13 @@
 (ns game.state
   (:refer-clojure :exclude [get])
   (:require [reagent.core :as reagent]
-            [game.views.heroes :as default-view]))
+            [game.views.heroes :as default-view]
+            [game.procedural.hero :refer [generate]]))
 
-(defonce state (reagent/atom {:view default-view/main}))
+(defonce state
+  (reagent/atom
+    {:view default-view/main
+     :heroes (map generate (range 100))}))
 
 (defn get [k & [default]]
   (clojure.core/get @state k default))
