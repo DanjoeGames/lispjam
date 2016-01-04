@@ -2,6 +2,7 @@
   (:require [reagent.core :as reagent :refer [atom]]
             [secretary.core :as secretary :refer-macros [defroute]]
             [devcards.core :as dc]
+            [game.battle :as battle]
             [game.ui.widgets :as wid]
             [game.state :as state]
             [game.views.heroes :as heroes-view]
@@ -65,3 +66,8 @@
 (defcard hp-bar 
   (reagent/as-element 
     (wid/hp-bar 5 5)))
+
+(defcard battle 
+  (reagent/as-element 
+    [:h1 ((battle/resolveBattle [{:attack 10 :role "defence" :toughness 8 :hp 100}] {:attack 10 :toughness 8 :hp 100}) :winner)]))
+
