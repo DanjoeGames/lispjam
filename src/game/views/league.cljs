@@ -21,7 +21,7 @@
       [widgets/level (:level hero)]]
      [:strong (:name hero)]
      [button
-      [:div "Hire for " [widgets/money 3000001]]]
+      [:div "Hire for " [widgets/money (:cost hero)]]]
      [widgets/overlay {:showing? false}
       [widgets/scroll
        [:h2 "Do you want to purchase this hero?"]
