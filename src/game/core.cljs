@@ -69,5 +69,5 @@
 
 (defcard battle 
   (reagent/as-element 
-    [:h1 ((battle/resolveBattle [{:attack 10 :role "defence" :toughness 8 :hp 100}] {:attack 10 :toughness 8 :hp 100}) :winner)]))
+    [:h1 ((battle/resolveBattle [{:level 2 :attack 10 :role "defence" :toughness 8 :hp 100}] {:level 2 :attack 10 :toughness 8 :hp 100}) :winner)]))
 

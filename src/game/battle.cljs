@@ -7,13 +7,19 @@
 
 (defn getHeroStrength [hero]
   (case (hero :role) 
-    "attack" (* (hero :attack) 2) 
-    "defence" (hero :attack)))
+    "attack" (* (* (hero :attack) 2) (hero :level))
+    "defence" (* (hero :attack) (hero :level))))
 
 (defn getHeroToughness [hero]
   (case (hero :role) 
-    "attack" (hero :toughness)
-    "defence" (* (hero :toughness) 2)))
+    "attack" (* (hero :toughness) (hero :level))
+    "defence" (* (* (hero :toughness) 2) (hero :level))))
+
+(defn getMonsterStrength [monster]
+  (* (monster :attack) (monster :level)))
+
+(defn getMonsterToughness [monster]
+  (* (monster :toughness) (monster :level)))
 
 (defn calculatePartyStrength [party] 
   (reduce + (map (fn [hero] (getHeroStrength hero)) party)))
@@ -37,9 +43,9 @@
 
 (defn resolveBattle [party monster]
   (let [monsterDamage 
-        (resolveDamage (calculatePartyStrength party) (monster :toughness))
+        (resolveDamage (calculatePartyStrength party) (getMonsterToughness monster))
         partyDamage
-        (resolveDamage (monster :attack) (calculatePartyToughness party))]
+        (resolveDamage (getMonsterStrength monster) (calculatePartyToughness party))]
     (case (> (hpPercentageMonster monster monsterDamage) 
              (hpPercentageParty party partyDamage))
       true {:winner "party" 
