@@ -10,26 +10,25 @@
    [button "League" {:on-click #(dispatch! "/league")} "blue"]
    [button "Shop"   {:on-click #(dispatch! "/shop")} "green"]])
 
-(defn monster-preview [monster]
-  [widgets/horizontal-preview
-   [:div {:class "hz-preview__level"}
-    [widgets/level (:level monster)]]
-   [:div [:strong (:name monster)]]
-   [item/slots [] 3]
-   [button [:span [icon "attack"] "Hunt"]]])
+(defn monster-preview
+ ([monster]
+  (monster-preview nil monster))
+ ([k monster]
+   [:div {:key k}
+    [widgets/horizontal-preview
+     [:div {:class "hz-preview__level"}
+      [widgets/level (:level monster)]]
+     [:div [:strong (:name monster)]]
+     [item/slots [] 3]
+     [button [:span [icon "attack"] "Hunt"]]]]))
 
 (defn monsters-list [monsters]
   [:div {:class "monsters-list"}
-   (map monster-preview monsters)])
+   (map-indexed monster-preview monsters)])
 
 (defn main []
   [:main
    [widgets/navbar "Hunt"]
-   [monsters-list
-     [{:name "Medusa" :level 65}
-      {:name "Orix" :level 43}
-      {:name "Orix" :level 43}
-      {:name "Orix" :level 43}
-      {:name "Centaur" :level 12}]]
+   [monsters-list []]
    [widgets/action-bar]])
 

@@ -270,7 +270,15 @@ hr {
 }
 
 .help {
-  background-position: -474px -25px;
+  background-position: -475px -25px;
+}
+
+.ascending {
+  background-position: -450px -25px;
+}
+
+.descending {
+  background-position: -425px -25px;
 }
 
 .amount--small {

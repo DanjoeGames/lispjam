@@ -8,7 +8,7 @@
    elements. Also takes text and an optional color
    where color is red, blue, green, yellow"
   [text props color]
-    (let [color (or color "default")
+    (let [color (or (:color props) color "default")
           css-class (str "btn" " " "btn--" color)]
       [:div (merge props {:class css-class})
         [:div {:class "ui btn__left"}]
@@ -58,8 +58,11 @@
 
 (defn xp-orb
   "Renders a full/empty xp orb icon depending on full?"
-  [full?]
-    [icon (if full? "xp-orb--full" "xp-orb--empty")])
+  ([full?]
+   (xp-orb nil full?))
+  ([k full?]
+    [:span {:key k}
+      [icon (if full? "xp-orb--full" "xp-orb--empty")]]))
 
 (defn xp-bar
   "Renders an XP bar of with y orbs. x orbs will
@@ -67,13 +70,16 @@
   [x y]
     [:div {:class "icon-bar"}
      [:strong "XP"]
-     (->> (repeat x true) (map xp-orb))
-     (->> (repeat (- y x) false) (map xp-orb))])
+     (->> (repeat x true) (map-indexed xp-orb))
+     (->> (repeat (- y x) false) (map-indexed xp-orb))])
 
 (defn heart
   "Renders a full/empty heart icon depending on full?"
-  [full?]
-    [icon (if full? "heart--full" "heart--empty")])
+ ([full?]
+  (heart nil full?))
+ ([k full?]
+  [:span {:key k}
+    [icon (if full? "heart--full" "heart--empty")]]))
 
 (defn hp-bar
   "Renders an HP bar of with y hearts. x hearts will
@@ -81,8 +87,8 @@
   [x y]
     [:div {:class "icon-bar"}
      [:strong "HP"]
-     (->> (repeat x true) (map heart))
-     (->> (repeat (- y x) false) (map heart))])
+     (->> (repeat x true) (map-indexed heart))
+     (->> (repeat (- y x) false) (map-indexed heart))])
 
 (defn money
   "Renders money with the appropriate color and suffix"
@@ -123,11 +129,15 @@
          [:hr]
          [button "Ok!" {:on-click hide!} "yellow"]]]])))
 
-(defn action-button [{text :text url :url color :color}]
+(defn action-button
+ ([action]
+  (action-button nil action))
+ ([k {text :text url :url color :color}]
   [button
    text
-   {:on-click #(dispatch! url)}
-   color])
+   {:key k
+    :on-click #(dispatch! url)}
+   color]))
 
 (defn action-bar []
   (let [actions [{:text "Heroes" :url "/"       :color "yellow"}
@@ -135,7 +145,7 @@
                  {:text "League" :url "/league" :color "blue"}
                  {:text "Shop"   :url "/shop"   :color "green"}]]
     [:div {:class "ui action-bar"}
-     (map action-button actions)
+     (map-indexed action-button actions)
      [help-button]]))
 
 (defn cycler [& children]

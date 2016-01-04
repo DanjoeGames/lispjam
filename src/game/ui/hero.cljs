@@ -36,8 +36,11 @@
 (defn preview
   "Renders a complete preview of a hero, expects a
    hero map as an argument."
-  [hero]
-    [:div {:class "hero-preview"}
+ ([hero]
+  (preview nil hero))
+ ([k hero]
+    [:div {:key k
+           :class "hero-preview"}
       [nametag hero]
       [image hero]
       [:div {:class "ui hero-image__footer"}]
@@ -52,12 +55,12 @@
         [button [icon "attack"] nil "red"]
         [button [icon "defend"] nil "blue"]
         [button [icon "sleep"]]]
-       [button [icon "potion"] nil]]])
+       [button [icon "potion"] nil]]]))
 
 (defn list
   "Renders a list of heroes from a seq/vector of
    hero maps"
   [heroes]
     [:div {:class "hero-list"}
-     (map preview heroes)])
+     (map-indexed preview heroes)])
 
