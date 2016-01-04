@@ -1,5 +1,6 @@
 (ns game.procedural.hero
-  (:require [game.models.hero :refer [skins hair clothes names]]))
+  (:require [game.models.hero :refer [skins hair clothes names]]
+            [game.models.items :as items]))
 
 (defn either [& args]
   (rand-nth args))
@@ -35,9 +36,12 @@
      :name (make-name)
      :skin (one-of (get skins gender))
      :hair (one-of (get hair gender))
+     :armor (either (one-of items/armor) nil)
+     :weapon (either (one-of items/weapons) nil)
+     :headgear (either (one-of items/headgear) nil)
      :clothes (one-of (get clothes gender))
      :level level
-     :cost (* (rand-int 10000) level)
+     :cost (.toFixed (.pow js/Math 5 (/ level 8) 3))
      :xp 0
      :hp 5
      :items []}))

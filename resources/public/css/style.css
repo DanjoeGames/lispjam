@@ -216,7 +216,7 @@ hr {
 .hero-image .sprite {
   position: absolute;
   top: 0;
-  left: 40px;
+  margin-left: 40px;
 }
 
 .hero-image__footer {
@@ -271,6 +271,10 @@ hr {
 
 .help {
   background-position: -475px -25px;
+}
+
+.skull {
+  background-position: -400px -25px;
 }
 
 .ascending {

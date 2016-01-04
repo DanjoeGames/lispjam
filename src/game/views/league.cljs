@@ -25,6 +25,7 @@
       [:div {:class "hz-preview__level"}
        [widgets/level (:level hero)]]
       [:strong (:name hero)]
+      [:hr]
       [button
        [:div "Hire for " [widgets/money (:cost hero)]]]
       [widgets/overlay {:showing? false}
@@ -39,7 +40,9 @@
   (let [reversed? (reagent/atom true)
         sort-ascend #(reset! reversed? false)
         sort-descend #(reset! reversed? true)
-        reverser #(if @reversed? (reverse %) %)]
+        reverser #(if @reversed? (reverse %) %)
+        show-dead? (reagent/atom true)
+        toggle-dead #(swap! show-dead? not)]
     (fn []
       [:div {:class "league-table"}
        [widgets/cycler
@@ -48,7 +51,14 @@
          {:on-click sort-ascend}]
         [button
          [:div [icon "descending"] "Sort"]
-         {:on-click sort-descend}]]
+         {:on-click sort-descend :color "blue"}]]
+       [widgets/cycler
+        [button
+         [:div [icon "skull"] "Show Dead"]
+         {:on-click toggle-dead}]
+        [button
+         [:div [icon "skull"] "Hide Dead"]
+         {:on-click toggle-dead :color "red"}]]
        [:div
          (->> heroes
               (sort-by :level)
