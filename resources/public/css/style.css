@@ -340,6 +340,10 @@ hr {
   margin: 0 5px;
 }
 
+.hero-preview .hero-image .sprite {
+  position: absolute;
+}
+
 .action-bar {
   text-align: center;
   position: fixed;

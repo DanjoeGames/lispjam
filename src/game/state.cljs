@@ -2,12 +2,14 @@
   (:refer-clojure :exclude [get get-in])
   (:require [reagent.core :as reagent]
             [game.views.heroes :as default-view]
-            [game.procedural.hero :refer [generate]]))
+            [game.procedural.hero :as hero]
+            [game.procedural.monster :as monster]))
 
 (defonce state
   (reagent/atom
     {:view default-view/main
-     :heroes (map generate (range 100))}))
+     :heroes (map hero/generate (range 100))
+     :monsters (map monster/generate (range 100))}))
 
 (defn get [k & [default]]
   (clojure.core/get @state k default))
