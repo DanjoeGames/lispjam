@@ -12,26 +12,39 @@
       [widgets/level (:level hero)]]
      [:span {:class "hero-preview__nametag__name"} (:name hero)]])
 
-(defn sprite [url x y]
-  (let [s 100
-        rx (- (.round js/Math (* x s)))
-        ry (- (.round js/Math (* y s)))]
-    [:div {:class "sprite"
-           :style {:background-image (str "url(" url ")")
-                   :background-position (str rx "px " ry "px")
-                   :display "inline-block"
-                   :width s
-                   :height s}}]))
+(defn sprite
+ ([url x y]
+  (sprite url x y 0 0))
+ ([url x y dx dy]
+   (let [s 100
+         sf 8
+         rx (- (.round js/Math (* x s)))
+         ry (- (.round js/Math (* y s)))]
+     [:div {:class "sprite"
+            :style {:background-image (str "url(" url ")")
+                    :background-position (str rx "px " ry "px")
+                    :left (.ceil js/Math (* dx sf))
+                    :top (.ceil js/Math (* dy sf))
+                    :display "inline-block"
+                    :width s
+                    :height s}}])))
 
 (defn image
   "Renders an image representation of a hero. Expects
    a hero map as an argument."
-  [{skin :skin hair :hair clothes :clothes}]
+  [{skin :skin
+    hair :hair
+    clothes :clothes
+    weapon :weapon
+    headgear :headgear
+    armor :armor}]
     [:div {:class "ui hero-image"}
      [sprite "/img/heroes.png" (:x skin) (:y skin)]
      [sprite "/img/heroes.png" (:x clothes) (:y clothes)]
      [sprite "/img/heroes.png" (:x hair) (:y hair)]
-     ])
+     (when armor    [sprite "img/items.png" (:x armor) (:y armor) 1 1])
+     (when headgear [sprite "img/items.png" (:x headgear) (:y headgear) 1 -2])
+     (when weapon   [sprite "img/items.png" (:x weapon) (:y weapon) -3 -1])])
 
 (defn preview
   "Renders a complete preview of a hero, expects a

@@ -1,5 +1,5 @@
 (ns game.state
-  (:refer-clojure :exclude [get])
+  (:refer-clojure :exclude [get get-in])
   (:require [reagent.core :as reagent]
             [game.views.heroes :as default-view]
             [game.procedural.hero :refer [generate]]))
@@ -11,6 +11,9 @@
 
 (defn get [k & [default]]
   (clojure.core/get @state k default))
+
+(defn get-in [ks & [default]]
+  (clojure.core/get-in @state ks default))
 
 (defn put! [k v]
   (swap! state assoc k v))
