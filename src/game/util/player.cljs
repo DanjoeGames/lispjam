@@ -48,7 +48,7 @@
     (println can-afford? already-owns?)
     (when (and can-afford? (not already-owns?))
       (add-hero! id)
-      #_(remove-gold! price))))
+      (remove-gold! price))))
 
 (defn sell-hero!
   "Sells a hero from a player's list"
