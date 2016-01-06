@@ -36,6 +36,10 @@ hr {
   background-image: url('/img/interface.png');
 }
 
+.faded {
+  color: #999;
+}
+
 /*
  * ------
  * Navbar

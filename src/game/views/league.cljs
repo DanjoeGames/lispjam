@@ -7,6 +7,17 @@
             [game.ui.item :as item]
             [game.util.player :as player]))
 
+(defn buy-hero-button
+  [hero]
+  (let [showing-confirm? (reagent/atom false)
+        show-confirm #(reset! showing-confirm? false)
+        hide-confirm #(reset! showing-confirm? true)]
+    (fn []
+      [:div
+       [button
+        [:div "Hire for " [widgets/money (:cost hero)]]
+        {:on-click #(player/buy-hero! (:id hero))}]])))
+
 ;; TODO refactor
 (defn table-entry
  [hero]
@@ -24,15 +35,11 @@
       [:div {:class "hz-preview__level"}
        [widgets/level (:level hero)]]
       [:strong (:name hero)]
-      [button
-       [:div "Hire for " [widgets/money (:cost hero)]]
-       {:on-click #(player/buy-hero! (:id hero))}]
-      [widgets/overlay {:showing? false}
-       [widgets/scroll
-        [:h2 "Do you want to purchase this hero?"]
-        [:hr]
-        [button "Cancel" nil "red"]
-        [button [widgets/money 300]]]]]
+      [:hr]
+      (cond
+        (player/owns-hero? (:id hero)) [:strong "Purchased"]
+        (player/has-enough-gold? (:cost hero)) [buy-hero-button hero]
+        :else [widgets/money (:cost hero)])]
      [:div {:class "ui hz-preview__right__bottom"}]]])
 
 (defn assign-id [id m] (assoc m :id id))
