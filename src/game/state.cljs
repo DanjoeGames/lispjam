@@ -1,14 +1,25 @@
 (ns game.state
   (:refer-clojure :exclude [get get-in])
   (:require [reagent.core :as reagent]
+            [game.config :as config]
             [game.procedural.hero :as hero]
             [game.procedural.monster :as monster]))
 
 (defonce state
   (reagent/atom
-    {:view :heroes
-     :heroes (map hero/generate (range 100))
-     :monsters (map monster/generate (range 100))}))
+    {:view config/initial-view
+     ;; initial population of heroes
+     :heroes (mapv hero/generate
+                   (range config/initial-hero-count))
+     ;; initial population of monsters
+     :monsters (mapv monster/generate
+                     (range config/initial-monster-count))
+     ;; initial gold for the player
+     :gold config/initial-player-gold
+     ;; store player heroes
+     :player-heroes #{}
+     ;; store player items
+     :inventory #{}}))
 
 (defn get [k & [default]]
   (clojure.core/get @state k default))
