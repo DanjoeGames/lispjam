@@ -17,7 +17,8 @@
     [:div {:class "hz-preview__left"}
      [:div {:class "ui hz-preview__left__top"}]
      [:div {:class "ui hz-preview__left__middle"}
-      [hero/image hero]]
+      [:div {:class "hero-image"}
+       [hero/image hero]]]
      [:div {:class "ui hz-preview__left__bottom"}]]
     [:div {:class "hz-preview__right"}
      [:div {:class "ui hz-preview__right__top"}]

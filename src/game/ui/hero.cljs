@@ -16,7 +16,7 @@
  ([url x y]
   (sprite url x y 0 0))
  ([url x y dx dy]
-   (let [s 100
+   (let [s 96
          sf 8
          rx (- (.round js/Math (* x s)))
          ry (- (.round js/Math (* y s)))]
@@ -38,7 +38,7 @@
     weapon :weapon
     headgear :headgear
     armor :armor}]
-    [:div {:class "ui hero-image"}
+    [:div {:class "hero-image"}
      [sprite "/img/heroes.png" (:x skin) (:y skin)]
      [sprite "/img/heroes.png" (:x clothes) (:y clothes)]
      [sprite "/img/heroes.png" (:x hair) (:y hair)]
@@ -55,7 +55,8 @@
     [:div {:key k
            :class "hero-preview"}
       [nametag hero]
-      [image hero]
+      [:div {:class "hero-background"}
+        [image hero]]
       [:div {:class "ui hero-image__footer"}]
       [:div {:class "ui hero-panel"}
         [widgets/hp-bar (:hp hero) 5]

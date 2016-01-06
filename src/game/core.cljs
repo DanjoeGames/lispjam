@@ -1,48 +1,30 @@
 (ns game.core
   (:require [reagent.core :as reagent :refer [atom]]
             [secretary.core :as secretary :refer-macros [defroute]]
-            [devcards.core :as dc]
             [game.state :as state]
             [game.views.heroes :as heroes-view]
             [game.views.hunt :as hunt-view]
-            [game.views.league :as league-view]
-            [game.models.hero :refer [skins hair clothes]]
-            [game.procedural.hero :as hero]))
+            [game.views.league :as league-view]))
 
 (enable-console-print!)
 
-(println skins)
-(println hair)
-(println clothes)
-
 (defroute "/league" []
-  (state/put! :view league-view/main))
+  (state/put! :view :league))
 (defroute "/hunt" []
-  (state/put! :view hunt-view/main))
+  (state/put! :view :hunt))
 (defroute "/*" []
-  (state/put! :view heroes-view/main))
+  (state/put! :view :heroes))
 
 (defn app []
   [:div
-    [(state/get :view)]])
+    [(case (state/get :view)
+       :heroes heroes-view/main
+       :hunt hunt-view/main
+       :league league-view/main)]])
 
-(defn hook-browser-navigation! []
-  (.addEventListener
-    js/window
-    "hashchange"
-    (fn [e]
-      (let [location (-> js/window .-location .-hash)
-            route (.slice location 1)]
-        (secretary/dispatch! route)))))
-
-(defn init! []
-  (secretary/set-config! :prefix \#)
-  (hook-browser-navigation!)
-  (reagent/render-component
-    [app]
-    (. js/document (getElementById "app"))))
-
-(init!)
+(reagent/render-component
+  [app]
+  (. js/document (getElementById "app")))
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on

@@ -206,10 +206,13 @@ hr {
   text-align: center;
 }
 
-.hero-image {
+.hero-background {
   background-image: url('/img/repeating-vertical.png');
-  width: 100%;
   background-position: -830px 0px;
+}
+
+.hero-image {
+  width: 100%;
   height: 100px;
   position: relative;
 }

@@ -21,7 +21,7 @@
     [:div {:class "hz-preview__left"}
      [:div {:class "ui hz-preview__left__top"}]
      [:div {:class "ui hz-preview__left__middle"}
-      [:div {:class "ui hero-image"}
+      [:div {:class "hero-image"}
         [sprite "/img/monsters.png" (:x monster) (:y monster)]]]
      [:div {:class "ui hz-preview__left__bottom"}]]
     [:div {:class "hz-preview__right"}
@@ -32,8 +32,8 @@
       [:div
         [:strong (:name monster)]]
       [:hr]
-      [button [:span [icon "attack"] "Hunt"]]
-     [:div {:class "ui hz-preview__right__bottom"}]]]]))
+      [button [:span [icon "attack"] "Hunt"]]]
+     [:div {:class "ui hz-preview__right__bottom"}]]]))
 
 (defn monsters-list [monsters]
   [:div {:class "monsters-list"}
