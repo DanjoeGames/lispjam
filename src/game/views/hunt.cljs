@@ -30,7 +30,9 @@
       [:div {:class "hz-preview__level"}
        [widgets/level (:level monster)]]
       [:div
-        [:strong (:name monster)]]
+        [:strong (:name monster)]
+        [:p {:class "faded"}
+         (get monster :desc "No description")]]
       [:hr]
       [button [:span [icon "attack"] "Hunt"]]]
      [:div {:class "ui hz-preview__right__bottom"}]]]))

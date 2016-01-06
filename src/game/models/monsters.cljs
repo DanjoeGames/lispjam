@@ -1,19 +1,19 @@
 (ns game.models.monsters)
 
 (def all
-  [{:type :demon, :x 0, :y 0, :level 5 :name "Small Demon"}
-   {:type :demon, :x 1, :y 0, :level 10 :name "Demon"}
+  [{:type :demon, :x 0, :y 0, :level 5 :name "Small Demon", :desc "Not a big demon"}
+   {:type :demon, :x 1, :y 0, :level 10 :name "Demon", :desc ""}
 
-   {:type :monk, :x 2, :y 0, :level 10 :name "Monk"}
+   {:type :monk, :x 2, :y 0, :level 10 :name "Monk", :desc "A hooded chap"}
    {:type :monk, :x 3, :y 0, :level 20 :name "Monk"}
    {:type :monk, :x 4, :y 0, :level 30 :name "Monk"}
    {:type :monk, :x 5, :y 0, :level 40 :name "Monk"}
 
-   {:type :dragon, :x 0, :y 1, :level 50 :name "Dragon"}
-   {:type :dragon, :x 1, :y 1, :level 60 :name "Dragon"}
-   {:type :dragon, :x 2, :y 1, :level 75 :name "Dragon"}
-   {:type :dragon, :x 3, :y 1, :level 80 :name "Dragon"}
-   {:type :dragon, :x 4, :y 1, :level 90 :name "Dragon"}
+   {:type :dragon, :x 0, :y 1, :level 50 :name "Dragon", :desc "A green scaled dragon"}
+   {:type :dragon, :x 1, :y 1, :level 60 :name "Dragon", :desc "A blue scaled dragon"}
+   {:type :dragon, :x 2, :y 1, :level 75 :name "Dragon", :desc "A purple scaled dragon"}
+   {:type :dragon, :x 3, :y 1, :level 80 :name "Dragon", :desc "A huge red scaled dragon"}
+   {:type :dragon, :x 4, :y 1, :level 90 :name "Dragon", :desc "An enormous black scaled dragon"}
 
    {:type :egypt, :x 0, :y 2, :level 100 :name "Horus"}
    {:type :egypt, :x 1, :y 2, :level 100 :name "Sobek"}
@@ -48,7 +48,7 @@
    {:type :molten, :x 1, :y 6, :level 50 :name "Molten Fiend"}
    {:type :molten, :x 2, :y 6, :level 60 :name "Molten Crawler"}
    {:type :molten, :x 3, :y 6, :level 70 :name "Molten Giant"}
-   {:type :molten, :x 3, :y 6, :level 100 :name "Molten God"}
+   {:type :molten, :x 4, :y 6, :level 100 :name "Molten God"}
 
    {:type :undead, :x 0, :y 7, :level 10 :name "Skeleton Child"}
    {:type :undead, :x 1, :y 7, :level 20 :name "Skeleton"}
