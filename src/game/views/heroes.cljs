@@ -1,11 +1,12 @@
 (ns game.views.heroes
   (:require [reagent.core :as reagent]
             [secretary.core :refer [dispatch!]]
+            [game.state :as state]
             [game.ui.widgets :as widgets :refer [button icon]]
             [game.ui.hero :as hero]
             [game.ui.item :as item]
             [game.util.core :as util]
-            [game.procedural.hero :refer [generate]]))
+            [game.util.hero :refer [id->hero]]))
 
 (defn action-bar []
   [:div {:class "ui action-bar"}
@@ -16,9 +17,7 @@
 (defn main []
   [:main
    [widgets/navbar "Heroes"]
-   [hero/list [(generate)
-               (generate)
-               (generate)]]
+   [hero/list (map id->hero (state/get :player-heroes))]
    [widgets/overlay {:showing? false}
      [widgets/scroll
       [:h2 "Victory!"]

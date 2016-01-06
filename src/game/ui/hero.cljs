@@ -1,6 +1,7 @@
 (ns game.ui.hero
   (:refer-clojure :exclude [list])
-  (:require [game.ui.widgets :as widgets :refer [button icon]]
+  (:require [secretary.core :refer [dispatch!]]
+            [game.ui.widgets :as widgets :refer [button icon]]
             [game.ui.item :as item]))
 
 (defn nametag
@@ -49,32 +50,37 @@
 (defn preview
   "Renders a complete preview of a hero, expects a
    hero map as an argument."
- ([hero]
-  (preview nil hero))
- ([k hero]
-    [:div {:key k
-           :class "hero-preview"}
-      [nametag hero]
-      [:div {:class "hero-background"}
-        [image hero]]
-      [:div {:class "ui hero-image__footer"}]
-      [:div {:class "ui hero-panel"}
-        [widgets/hp-bar (:hp hero) 5]
-        [widgets/xp-bar (:xp hero) 5]
-        [:br]
-        [item/slots (:items hero) 3]]
-      [:div {:class "ui hero-footer"}]
-      [:div
-       [widgets/cycler
-        [button [icon "attack"] nil "red"]
-        [button [icon "defend"] nil "blue"]
-        [button [icon "sleep"]]]
-       [button [icon "potion"] nil]]]))
+ [id hero]
+   [:div {:key id
+          :class "hero-preview"}
+     [nametag hero]
+     [:div {:class "hero-background"}
+       [image hero]]
+     [:div {:class "ui hero-image__footer"}]
+     [:div {:class "ui hero-panel"}
+       [widgets/hp-bar (:hp hero) 5]
+       [widgets/xp-bar (:xp hero) 5]
+       [:br]
+       [item/slots (:items hero) 3]]
+     [:div {:class "ui hero-footer"}]
+     [:div
+      [widgets/cycler
+       [button [icon "attack"] nil "red"]
+       [button [icon "defend"] nil "blue"]
+       [button [icon "sleep"]]]
+      [button [icon "potion"] nil]]])
 
 (defn list
   "Renders a list of heroes from a seq/vector of
    hero maps"
   [heroes]
     [:div {:class "hero-list"}
-     (map-indexed preview heroes)])
+     (if (empty? heroes)
+       [:section
+        [:h3 "You don't own any heroes!"]
+        [:p "Head to the league table to buy some."]
+        [button
+         "League"
+         {:color "blue" :on-click #(dispatch! "/league")}]]
+       (map-indexed preview heroes))])
 

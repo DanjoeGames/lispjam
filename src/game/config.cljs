@@ -4,7 +4,7 @@
 (def initial-view :heroes)
 
 ;; the initial number of monsters spawned
-(def initial-hero-count 10)
+(def initial-hero-count 50)
 
 ;; the initial number of heroes spawned
 (def initial-monster-count 10)

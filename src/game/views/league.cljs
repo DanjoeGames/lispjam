@@ -5,14 +5,12 @@
             [game.ui.hero :as hero]
             [game.ui.widgets :as widgets :refer [button icon pill]]
             [game.ui.item :as item]
-            [game.procedural.hero :refer [generate]]))
+            [game.util.player :as player]))
 
 ;; TODO refactor
 (defn table-entry
- ([hero]
-  (table-entry nil hero))
- ([k hero]
-   [:div {:key k
+ [hero]
+   [:div {:key (:id hero)
           :class "hz-preview"}
     [:div {:class "hz-preview__left"}
      [:div {:class "ui hz-preview__left__top"}]
@@ -27,14 +25,17 @@
        [widgets/level (:level hero)]]
       [:strong (:name hero)]
       [button
-       [:div "Hire for " [widgets/money (:cost hero)]]]
+       [:div "Hire for " [widgets/money (:cost hero)]]
+       {:on-click #(player/buy-hero! (:id hero))}]
       [widgets/overlay {:showing? false}
        [widgets/scroll
         [:h2 "Do you want to purchase this hero?"]
         [:hr]
         [button "Cancel" nil "red"]
         [button [widgets/money 300]]]]]
-     [:div {:class "ui hz-preview__right__bottom"}]]]))
+     [:div {:class "ui hz-preview__right__bottom"}]]])
+
+(defn assign-id [id m] (assoc m :id id))
 
 (defn league-table [heroes]
   (let [reversed? (reagent/atom true)
@@ -52,9 +53,10 @@
          {:on-click sort-descend}]]
        [:div
          (->> heroes
+              (map-indexed assign-id)
               (sort-by :level)
               (reverser)
-              (map-indexed table-entry))]])))
+              (map table-entry))]])))
 
 (defn main []
   [:main

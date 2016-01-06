@@ -20,7 +20,8 @@
     [(case (state/get :view)
        :heroes heroes-view/main
        :hunt hunt-view/main
-       :league league-view/main)]])
+       :league league-view/main
+       heroes-view/main)]])
 
 (reagent/render-component
   [app]
