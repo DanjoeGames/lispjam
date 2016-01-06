@@ -1,7 +1,5 @@
 (ns game.ui.widgets
-  (:require [reagent.core :as reagent]
-            [secretary.core :refer [dispatch!]]
-            [game.state :as state]
+  (:require [game.state :as state]
             [game.util.core :as util]))
 
 (defn button
@@ -113,7 +111,7 @@
      [pill [level 300]]])
 
 (defn help-button []
-  (let [showing? (reagent/atom false)
+  (let [showing? (atom false)
         show! #(reset! showing? true)
         hide! #(reset! showing? false)]
     (fn []
@@ -137,7 +135,7 @@
   [button
    text
    {:key k
-    :on-click #(dispatch! url)}
+    :on-click #(url)}
    color]))
 
 (defn action-bar []
@@ -150,7 +148,7 @@
      [help-button]]))
 
 (defn cycler [& children]
-  (let [index (reagent/atom 0)
+  (let [index (atom 0)
         limit (count children)]
     (fn []
       [:span {:on-click #(swap! index inc)}

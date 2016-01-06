@@ -1,12 +1,13 @@
 (ns game.views.heroes
-  (:require [reagent.core :as reagent]
-            [secretary.core :refer [dispatch!]]
+  (:require
             [game.state :as state]
             [game.ui.widgets :as widgets :refer [button icon]]
             [game.ui.hero :as hero]
             [game.ui.item :as item]
             [game.util.core :as util]
             [game.procedural.hero :refer [generate]]))
+
+(defn dispatch! [st])
 
 (defn action-bar []
   [:div {:class "ui action-bar"}

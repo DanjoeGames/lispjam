@@ -1,11 +1,10 @@
 (ns game.state
   (:refer-clojure :exclude [get get-in])
-  (:require [reagent.core :as reagent]
-            [game.views.heroes :as default-view]
+  (:require [game.views.heroes :as default-view]
             [game.procedural.hero :refer [generate]]))
 
 (defonce state
-  (reagent/atom
+  (atom
     {:view default-view/main
      ;; the amount of gold the player has
      :gold 5000

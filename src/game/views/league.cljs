@@ -1,11 +1,11 @@
 (ns game.views.league
-  (:require [reagent.core :as reagent]
-            [secretary.core :refer [dispatch!]]
+  (:require
             [game.state :as state]
             [game.ui.hero :as hero]
             [game.ui.widgets :as widgets :refer [button icon pill]]
             [game.ui.item :as item]
             [game.procedural.hero :refer [generate]]))
+
 
 ;; TODO refactor
 (defn table-entry
@@ -37,11 +37,11 @@
      [:div {:class "ui hz-preview__right__bottom"}]]]))
 
 (defn league-table [heroes]
-  (let [reversed? (reagent/atom true)
+  (let [reversed? (atom true)
         sort-ascend #(reset! reversed? false)
         sort-descend #(reset! reversed? true)
         reverser #(if @reversed? (reverse %) %)
-        show-dead? (reagent/atom true)
+        show-dead? (atom true)
         toggle-dead #(swap! show-dead? not)]
     (fn []
       [:div {:class "league-table"}

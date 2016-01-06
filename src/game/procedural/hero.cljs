@@ -20,7 +20,6 @@
   "Capitalize each word in a string"
   [name]
     (->> (.split name " ")
-         (map clojure.string/capitalize)
          (interpose " ")
          (apply str)))
 

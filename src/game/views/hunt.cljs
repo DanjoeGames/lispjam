@@ -1,8 +1,9 @@
 (ns game.views.hunt
-  (:require [reagent.core :as reagent]
-            [secretary.core :refer [dispatch!]]
+  (:require
             [game.ui.widgets :as widgets :refer [button icon]]
             [game.ui.item :as item]))
+
+(defn dispatch! [st])
 
 (defn action-bar []
   [:div {:class "ui action-bar"}
