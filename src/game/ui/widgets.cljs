@@ -1,6 +1,7 @@
 (ns game.ui.widgets
   (:require [reagent.core :as reagent]
             [secretary.core :refer [dispatch!]]
+            [game.state :as state]
             [game.util.core :as util]))
 
 (defn button
@@ -107,7 +108,7 @@
    inside it"
   [title]
     [:nav {:class "ui navbar"}
-     [pill [money 110044]]
+     [pill [money (state/get :gold)]]
      [pill [:h2 title]]
      [pill [level 300]]])
 

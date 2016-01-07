@@ -68,7 +68,8 @@
        [button [icon "attack"] nil "red"]
        [button [icon "defend"] nil "blue"]
        [button [icon "sleep"]]]
-      [button [icon "potion"] nil]]])
+      [button [icon "potion"] nil]
+      [button [icon "quit"]]]])
 
 (defn list
   "Renders a list of heroes from a seq/vector of
