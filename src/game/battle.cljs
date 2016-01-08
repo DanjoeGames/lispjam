@@ -7,19 +7,19 @@
 
 (defn getHeroStrength [hero]
   (case (hero :role) 
-    "attack" (* (* (hero :attack) 2) (hero :level))
-    "defence" (* (hero :attack) (hero :level))))
+    "attack" (* (* ((hero :weapon) :strength) 2) (hero :level))
+    "defence" (* ((hero :weapon) :strength) (hero :level))))
 
 (defn getHeroToughness [hero]
   (case (hero :role) 
-    "attack" (* (hero :toughness) (hero :level))
-    "defence" (* (* (hero :toughness) 2) (hero :level))))
+    "attack" (* ((hero :armor) :defence) (hero :level))
+    "defence" (* (* ((hero :armor) :defence) 2) (hero :level))))
 
 (defn getMonsterStrength [monster]
-  (* (monster :attack) (monster :level)))
+  (* ((monster :weapon) :strength) (monster :level)))
 
 (defn getMonsterToughness [monster]
-  (* (monster :toughness) (monster :level)))
+  (* ((monster :armor) :defence) (monster :level)))
 
 (defn calculatePartyStrength [party] 
   (reduce + (map (fn [hero] (getHeroStrength hero)) party)))
