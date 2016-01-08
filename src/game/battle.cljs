@@ -6,20 +6,21 @@
     false 0))
 
 (defn getHeroStrength [hero]
-  (case (hero :role) 
-    "attack" (* (* ((hero :weapon) :strength) 2) (hero :level))
-    "defence" (* ((hero :weapon) :strength) (hero :level))))
+  (println hero)
+  (case (:role hero) 
+    "attack" (* (* (:strength (:weapon hero)) 2) (:level hero))
+    "defence" (* (:strength (:weapon hero)) (:level hero))))
 
 (defn getHeroToughness [hero]
   (case (hero :role) 
-    "attack" (* ((hero :armor) :defence) (hero :level))
-    "defence" (* (* ((hero :armor) :defence) 2) (hero :level))))
+    "attack" (* (:defence (:armor hero)) (:level hero))
+    "defence" (* (* (:defence (:armor hero)) 2) (:level hero))))
 
 (defn getMonsterStrength [monster]
-  (* ((monster :weapon) :strength) (monster :level)))
+  (* (:strength (:weapon monster)) (:level monster)))
 
 (defn getMonsterToughness [monster]
-  (* ((monster :armor) :defence) (monster :level)))
+  (* (:defence (:armor monster)) (:level monster)))
 
 (defn calculatePartyStrength [party] 
   (reduce + (map (fn [hero] (getHeroStrength hero)) party)))
@@ -33,13 +34,13 @@
     (*  (+ diff (rand-int (/ diff 2))) effective)))
 
 (defn calculatePartyHP [party]
-  (reduce + (map (fn [hero] (hero :hp)) party)))
+  (reduce + (map (fn [hero] (:hp hero)) party)))
 
 (defn hpPercentageParty [party damage]
   (* (/ (calculatePartyHP party) 100) damage))
 
 (defn hpPercentageMonster [monster damage]
-  (* (/ (monster :hp) 100) damage))
+  (* (/ (:hp monster) 100) damage))
 
 (defn resolveBattle [party monster]
   (let [monsterDamage 
