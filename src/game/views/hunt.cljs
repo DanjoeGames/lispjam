@@ -2,15 +2,26 @@
   (:require [reagent.core :as reagent]
             [secretary.core :refer [dispatch!]]
             [game.state :as state]
-            [game.ui.widgets :as widgets :refer [button icon]]
+            [game.ui.widgets :as widgets :refer [button icon overlay]]
             [game.ui.item :as item]
-            [game.ui.hero :refer [sprite]]))
+            [game.ui.hero :refer [sprite]]
+            [game.util.hero :refer [id->hero]]
+            [game.battle :as battle]))
 
 (defn action-bar []
   [:div {:class "ui action-bar"}
    [button "Heroes" {:on-click #(dispatch! "/heroes")} "yellow"]
    [button "League" {:on-click #(dispatch! "/league")} "blue"]
    [button "Shop"   {:on-click #(dispatch! "/shop")} "green"]])
+
+(defn attack-button [monster]
+  (let [showing? (reagent/atom false)
+        show! #(reset! showing? true)
+        hide! #(reset! showing? false)]
+      [button [:span [icon "attack"] "Hunt"] 
+       {:on-click #(println (battle/resolveBattle (map id->hero (state/get :player-heroes)) monster))}]))
+    ;[overlay ;{:showing? @showing?}
+    ; [:p ((battle/resolveBattle (map id->hero (state/get :player-heroes)) monster) :winner)  ]]))
 
 (defn monster-preview
  ([monster]
@@ -34,7 +45,7 @@
         [:p {:class "faded"}
          (get monster :desc "No description")]]
       [:hr]
-      [button [:span [icon "attack"] "Hunt"]]]
+     (attack-button monster)]
      [:div {:class "ui hz-preview__right__bottom"}]]]))
 
 (defn monsters-list [monsters]

@@ -44,5 +44,6 @@
      :cost (.toFixed (.pow js/Math 5 (/ level 8) 3))
      :xp 0
      :hp 5
-     :items []}))
+     :items []
+     :role "attack"}))
 
